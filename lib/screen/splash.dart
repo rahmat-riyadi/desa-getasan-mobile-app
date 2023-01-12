@@ -11,6 +11,17 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Pallete.primary,
       body: Stack(
         children: [
+          Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: const BoxDecoration(
+              gradient : LinearGradient(
+                end: Alignment(-6.0703366777659085e-9,1),
+                begin: Alignment(-0.06073538213968277,-5.587935447692871e-9),
+                colors: [Color.fromRGBO(135, 16, 30, 1),Color.fromRGBO(201, 16, 34, 1)]
+              ),
+            )
+          ),
           SizedBox(
             width: MediaQuery.of(context).size.width,
             child: Column(
@@ -37,7 +48,11 @@ class SplashScreen extends StatelessWidget {
           ),
           Align(
             alignment: AlignmentDirectional.bottomCenter,
-            child: SvgPicture.asset('assets/pattern.svg')
+            child: SvgPicture.asset(
+              'assets/pattern.svg',
+              fit: BoxFit.cover,
+              width: MediaQuery.of(context).size.width,
+            )
           )
         ]
       ),

@@ -75,7 +75,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                   textStyle: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700 
-                  )
+                  ),
+                  backgroundColor: Pallete.secondary
                 ),
                 onPressed: (){}, 
                 child: const Text('Mulai Sekarang'),
@@ -143,7 +144,7 @@ class SliderIndicator extends StatelessWidget {
         height: 10,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: (index == selected!) ? const Color(0xff00AAE1) : const Color(0xffEAEAEA)
+          color: (index == selected!) ? Pallete.secondary : const Color(0xffEAEAEA)
         ),
       ))
     );

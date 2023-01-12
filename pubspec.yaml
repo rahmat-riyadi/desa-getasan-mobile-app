@@ -70,7 +70,19 @@ flutter:
     - assets/icons/desa.svg
     - assets/icons/desa.png
     - assets/icons/header-pattern.png
+    - assets/icons/profile-circle.svg
+    - assets/icons/calendar-circle.svg
+    - assets/icons/map.svg
+    - assets/icons/market.svg
+    - assets/icons/trolly.svg
+    - assets/icons/chat.svg
+    - assets/icons/notification.svg
+    - assets/icons/call.svg
     - assets/placeholder.png
+    - assets/header-card-bg.png
+    - assets/complaintBtnBg.png
+    - assets/market-header.png
+    - assets/contactCardBg.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

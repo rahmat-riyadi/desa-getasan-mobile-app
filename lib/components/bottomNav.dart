@@ -49,7 +49,7 @@ class BottomNav extends StatelessWidget {
                       padding: const EdgeInsets.all(18),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Pallete.secondary
+                        color: Pallete.primary
                       ),
                       child: const Icon(Icons.email, color: Colors.white,),
                     ),

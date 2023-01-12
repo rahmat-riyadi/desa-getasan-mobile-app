@@ -1,5 +1,8 @@
 import 'package:desa_getasan_app/screen/index.dart';
 import 'package:desa_getasan_app/screen/login.dart';
+import 'package:desa_getasan_app/screen/market.dart';
+import 'package:desa_getasan_app/screen/splash.dart';
+import 'package:desa_getasan_app/screen/welcomeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.plusJakartaSansTextTheme()
         ),
         title: 'Desa Getasan',
-        home: const Index()
+        home: const MarketPage()
       ),
     );
   }
