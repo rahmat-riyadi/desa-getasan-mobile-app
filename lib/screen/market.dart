@@ -1,5 +1,6 @@
 // ignore_for_file: use_full_hex_values_for_flutter_colors
 
+import 'package:desa_getasan_app/components/marketCard.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 
@@ -9,56 +10,75 @@ class MarketPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Pallete.primary,
-            expandedHeight: MediaQuery.of(context).size.height * 0.16,
-            flexibleSpace: SingleChildScrollView(
+            floating: true,
+            bottom: PreferredSize(
+              preferredSize: const Size.fromHeight(0),
               child: Container(
+                margin: EdgeInsets.zero,
+                width: double.maxFinite,
+                height: 10,
                 decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/market-header.png'),
-                    fit: BoxFit.cover,
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10)
                   )
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SafeArea(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ElevatedButton(
-                        onPressed: (){},
-                        style: ElevatedButton.styleFrom(
-                          shape: const CircleBorder(),
-                          elevation: 0,
-                          backgroundColor: Colors.white,
-                          padding: const EdgeInsets.all(10),
-                          minimumSize: const Size(0, 0),
-                        ), 
-                        child: const Icon(Icons.arrow_back_ios_new_rounded, size: 15, color: Pallete.primary,),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(top: 5, bottom: 8),
-                        child: Text(
-                          'Pasar',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                            color: Colors.white
+              ),
+            ),
+            backgroundColor: Pallete.primary,
+            expandedHeight: MediaQuery.of(context).size.height * 0.16,
+            flexibleSpace: FlexibleSpaceBar(
+              background: LayoutBuilder(
+                builder: (p0, p1) => Container(
+                  height: p1.maxHeight,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/market-header.png'),
+                      fit: BoxFit.cover,
+                    )
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: SafeArea(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ElevatedButton(
+                          onPressed: (){},
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            elevation: 0,
+                            backgroundColor: Colors.white,
+                            padding: const EdgeInsets.all(10),
+                            minimumSize: const Size(0, 0),
+                          ), 
+                          child: const Icon(Icons.arrow_back_ios_new_rounded, size: 15, color: Pallete.primary,),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 5, bottom: 8),
+                          child: Text(
+                            'Pasar',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 18,
+                              color: Colors.white
+                            ),
                           ),
                         ),
-                      ),
-                      const Text(
-                        'Lorem ipsum dolor sit amet consectetur.',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14,
-                          color: Colors.white
-                        ),
-                      )
-                    ],
+                        const Text(
+                          'Lorem ipsum dolor sit amet consectetur.',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14,
+                            color: Colors.white
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -66,89 +86,55 @@ class MarketPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              height: 50,
-              decoration: const BoxDecoration(
-                // color: Colors.amber,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                )
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24 ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Lihat Berdasarkan',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600
+                    ),
+                  ),
+                  DropdownButton(
+                    items: const [
+                      DropdownMenuItem(
+                        child: Text('barang'),
+                        value: 'barang',
+                      ),
+                      DropdownMenuItem(
+                        child: Text('barang'),
+                        value: 'Pakaian',
+                      ),
+                    ], 
+                    onChanged: (newVal) => print(newVal)
+                  )
+                ],
               ),
             ),
           ),
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => Container(
-                margin: EdgeInsets.only( 
-                  right: (index % 2 == 1 ) ? 10 : 0, 
-                  left: (index % 2 == 0 ) ? 10 : 0,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromRGBO(0, 0, 0, 0.10),
-                      offset: Offset(0, 1),
-                      blurRadius: 12
-                    )
-                  ]
-                ),
-                child: Column(
-                  children: [
-                    LayoutBuilder(
-                      builder: (p0, p1) => Image.network(
-                        'https://api.lorem.space/image/house?w=250&h=250',
-                        width: p1.maxWidth,
-                        height: 120,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: const BoxDecoration(
-                              color: Color(0xff0e153a0d)
-                            ),
-                            child: const Text(
-                              'Barang',
-                              style: TextStyle(fontSize: 12),
-                            ),
-                          ),
-                          const Text(
-                            'Lorem Ipsum',
-                            style: TextStyle(
-                              fontSize: 14
-                            ),
-                          ),
-                          // const Text(
-                          //   'Rp. 80.000,-',
-                          //   style: TextStyle(
-                          //     fontSize: 14
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+              (context, index) => MarketCard(
+                category: 'barang',
+                index: index,
+                item: 'Item',
+                price: 'Rp. 100.000,00',
               ),
               childCount: 20
             ), 
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 20,
-              crossAxisSpacing: 29,
+              crossAxisSpacing: 20,
+              childAspectRatio: 0.77,
             )
-          )
+          ),
           
         ],
       ),
     );
   }
 }
+
