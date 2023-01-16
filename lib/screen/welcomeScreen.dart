@@ -78,7 +78,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                   ),
                   backgroundColor: Pallete.secondary
                 ),
-                onPressed: (){}, 
+                onPressed: () => Navigator.pushNamed(context, '/login'), 
                 child: const Text('Mulai Sekarang'),
               )
             ],

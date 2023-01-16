@@ -1,5 +1,3 @@
-// ignore_for_file: use_full_hex_values_for_flutter_colors
-
 import 'package:desa_getasan_app/components/marketCard.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
@@ -14,23 +12,31 @@ class MarketPage extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            automaticallyImplyLeading: false,
             floating: true,
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(0),
               child: Container(
                 margin: EdgeInsets.zero,
                 width: double.maxFinite,
-                height: 10,
+                height: 20,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10),
                     topRight: Radius.circular(10)
-                  )
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.white,
+                      offset: Offset(1, 1)
+                    )
+                  ]
                 ),
               ),
             ),
             backgroundColor: Pallete.primary,
+            elevation: 0,
             expandedHeight: MediaQuery.of(context).size.height * 0.16,
             flexibleSpace: FlexibleSpaceBar(
               background: LayoutBuilder(
@@ -48,7 +54,7 @@ class MarketPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ElevatedButton(
-                          onPressed: (){},
+                          onPressed: () => Navigator.pop(context),
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
                             elevation: 0,
@@ -86,7 +92,7 @@ class MarketPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24 ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10 ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -116,11 +122,14 @@ class MarketPage extends StatelessWidget {
           ),
           SliverGrid(
             delegate: SliverChildBuilderDelegate(
-              (context, index) => MarketCard(
-                category: 'barang',
-                index: index,
-                item: 'Item',
-                price: 'Rp. 100.000,00',
+              (context, index) => GestureDetector(
+                onTap: () => Navigator.pushNamed(context, '/detailMarket'),
+                child: MarketCard(
+                  category: 'barang',
+                  index: index,
+                  item: 'Item',
+                  price: 'Rp. 100.000,00',
+                ),
               ),
               childCount: 20
             ), 

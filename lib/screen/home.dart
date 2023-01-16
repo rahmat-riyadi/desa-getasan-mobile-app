@@ -1,4 +1,3 @@
-
 import 'package:desa_getasan_app/components/announcementList.dart';
 import 'package:desa_getasan_app/components/emergencyContactCard.dart';
 import 'package:desa_getasan_app/components/exploreCard.dart';
@@ -20,7 +19,7 @@ class Home extends StatelessWidget {
           children: [
             Container(
               // height: MediaQuery.of(context).size.height * 0.3,
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                 color: Pallete.primary,
               ),
@@ -131,18 +130,21 @@ class Home extends StatelessWidget {
                     Container(
                       margin: const EdgeInsets.only(top: 12),
                       child: Row(
-                        children: const [
-                          ExploreCard(
+                        children: [
+                          const ExploreCard(
                             icon: 'map.svg',
-                            title: 'Visual Map',
+                            title: 'Tourism Map',
                           ),
-                          SizedBox(width: 15),
-                          ExploreCard(
-                            icon: 'market.svg',
-                            title: 'Pasar',
+                          const SizedBox(width: 15),
+                          GestureDetector(
+                            onTap: () => Navigator.pushNamed(context, '/market'),
+                            child: const ExploreCard(
+                              icon: 'market.svg',
+                              title: 'Pasar',
+                            ),
                           ),
-                          SizedBox(width: 15),
-                          ExploreCard(
+                          const SizedBox(width: 15),
+                          const ExploreCard(
                             icon: 'trolly.svg',
                             title: 'Produk Saya',
                           ),
@@ -160,6 +162,7 @@ class Home extends StatelessWidget {
                         )
                       ),
                       child: ListTile(
+                        onTap: () => Navigator.pushNamed(context, '/complaint'),
                         title: const Text(
                           'Ajukan Aduan Anda',
                           style: TextStyle(
@@ -203,7 +206,7 @@ class Home extends StatelessWidget {
                     ),
                     const SectionTitle(title: 'Pengumuman'),
                     const SizedBox(height: 20),
-                     AnnouncementList(
+                     const AnnouncementList(
                       title: 'Acara Adat Desa Getasan',
                       date: '7 Januari 2023',
                       desc: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',

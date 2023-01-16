@@ -1,8 +1,8 @@
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class ComplaintPage extends StatelessWidget {
+  const ComplaintPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,27 +21,36 @@ class LoginPage extends StatelessWidget {
             children: [
               SafeArea(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20) + const EdgeInsets.only(top: 30),
-                  // decoration: BoxDecoration(color: Colors.black),
+                  padding: const EdgeInsets.symmetric(horizontal: 20) + const EdgeInsets.only(top: 10),
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.15,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Image.asset('assets/icons/desa.png'),
+                      ElevatedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: ElevatedButton.styleFrom(
+                          shape: const CircleBorder(),
+                          elevation: 0,
+                          backgroundColor: Colors.white,
+                          padding: const EdgeInsets.all(10),
+                          minimumSize: const Size(0, 0),
+                        ), 
+                        child: const Icon(Icons.arrow_back_ios_new_rounded, size: 15, color: Colors.black,),
+                      ),
                       const SizedBox(height: 20),
                       const Text(
-                        'Selamat Datang',
+                        'Ajukan Aduan',
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 18,
                           fontWeight: FontWeight.w700,
                           color: Colors.white
                         ),
                       ),
                       const SizedBox(height: 15),
                       const Text(
-                        'Silahkan Masukkan Nik dan Password Anda!',
+                        'Lorem ipsum dolor sit amet consectetur.',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -73,34 +82,9 @@ class LoginPage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text(
-                            'Nik',
-                            style: TextStyle(
-                              color: Color(0xFF5B5B5B),
-                              fontSize: 14
-                            ),
-                          ),
+                          InputLabel(label: 'Nama'),
                           SizedBox(height: 10),
-                          TextField(
-                            decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.person),
-                              hintText: 'Exp:123456',
-                              contentPadding: EdgeInsets.symmetric(vertical: 18),
-                              filled: true,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(5)),
-                                borderSide: BorderSide.none
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(5)),
-                                borderSide: BorderSide(
-                                  color: Pallete.secondary
-                                )
-                              ),
-                              focusColor: Pallete.secondary,
-                              fillColor: Color(0xffF4F5F6)
-                            )
-                          )
+                          TextInput(placeholder: 'Exp: Fidyah Nurfitrah',)
                         ],
                       ),
                       const SizedBox(height: 16),
@@ -108,20 +92,34 @@ class LoginPage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
-                          Text(
-                            'Password',
-                            style: TextStyle(
-                              color: Color(0xFF5B5B5B),
-                              fontSize: 14
-                            ),
-                          ),
+                          InputLabel(label: 'No. Telepon'),
+                          SizedBox(height: 10),
+                          TextInput(placeholder: 'Exp: 0878',)
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          InputLabel(label: 'Email'),
+                          SizedBox(height: 10),
+                          TextInput(placeholder: 'Exp: fidyahh@gmail.com',)
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          InputLabel(label: 'Deskripsi Aduan'),
                           SizedBox(height: 10),
                           TextField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 5,
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock_outlined),
-                              hintText: 'Password',
-                              suffixIcon: Icon(Icons.remove_red_eye_outlined),
-                              contentPadding: EdgeInsets.symmetric(vertical: 18),
+                              hintText: 'Deskripsi',
+                              contentPadding: EdgeInsets.all(12),
                               filled: true,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(5)),
@@ -163,6 +161,59 @@ class LoginPage extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );;
+  }
+}
+
+class TextInput extends StatelessWidget {
+
+  final String placeholder;
+
+  const TextInput({
+    Key? key, required this.placeholder,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      decoration: InputDecoration(
+        hintText: placeholder,
+        contentPadding: const EdgeInsets.all(12),
+        filled: true,
+        border: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide.none
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(
+            color: Pallete.secondary
+          )
+        ),
+        focusColor: Pallete.secondary,
+        fillColor: const Color(0xffF4F5F6)
+      )
+    );
+  }
+}
+
+class InputLabel extends StatelessWidget {
+
+  final String label;
+
+  const InputLabel({
+    Key? key, required this.label,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      label,
+      style: const TextStyle(
+        color: Color(0xFF5B5B5B),
+        fontSize: 14,
+        fontWeight: FontWeight.w600
       ),
     );
   }
