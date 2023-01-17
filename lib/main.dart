@@ -1,3 +1,4 @@
+import 'package:desa_getasan_app/screen/addProduct.dart';
 import 'package:desa_getasan_app/screen/complaintPage.dart';
 import 'package:desa_getasan_app/screen/detailMarket.dart';
 import 'package:desa_getasan_app/screen/index.dart';
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
           '/home': (context) => Index(),
           '/market' :(context) => MarketPage(),
           '/detailMarket' :(context) => DetailMarketPage(),
-          '/complaint' :(context) => ComplaintPage()
+          '/complaint' :(context) => ComplaintPage(),
+          '/addProduct' :(context) => AddProductPage(),
         },
         theme: ThemeData(
           textTheme: GoogleFonts.plusJakartaSansTextTheme()

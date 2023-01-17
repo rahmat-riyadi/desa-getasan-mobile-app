@@ -128,25 +128,40 @@ class Home extends StatelessWidget {
                   children: [
                     const SectionTitle(title: 'Explor'),
                     Container(
-                      margin: const EdgeInsets.only(top: 12),
+                      margin: const EdgeInsets.only(top: 12, left: 10, right: 10),
                       child: Row(
                         children: [
-                          const ExploreCard(
-                            icon: 'map.svg',
-                            title: 'Tourism Map',
-                          ),
-                          const SizedBox(width: 15),
-                          GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, '/market'),
-                            child: const ExploreCard(
-                              icon: 'market.svg',
-                              title: 'Pasar',
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: GestureDetector(
+                              onTap: (){},
+                              child: const ExploreCard(
+                                icon: 'map.svg',
+                                title: 'Tourism Map',
+                              ),
                             ),
                           ),
                           const SizedBox(width: 15),
-                          const ExploreCard(
-                            icon: 'trolly.svg',
-                            title: 'Produk Saya',
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: GestureDetector(
+                              onTap: () => Navigator.pushNamed(context, '/market', arguments: { 'userProduct': false }),
+                              child: const ExploreCard(
+                                icon: 'market.svg',
+                                title: 'Pasar',
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 15),
+                          Flexible(
+                            fit: FlexFit.tight,
+                            child: GestureDetector(
+                              onTap: () => Navigator.pushNamed(context, '/market', arguments: { 'userProduct': true }),
+                              child: const ExploreCard(
+                                icon: 'trolly.svg',
+                                title: 'Produk Saya',
+                              ),
+                            ),
                           ),
                         ],
                       ),

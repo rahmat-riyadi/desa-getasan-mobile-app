@@ -1,3 +1,5 @@
+import 'package:desa_getasan_app/components/inputLabel.dart';
+import 'package:desa_getasan_app/components/textInput.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 
@@ -146,10 +148,10 @@ class ComplaintPage extends StatelessWidget {
                           elevation: 0
                         ),
                         child: const Text(
-                          'Masuk',
+                          'Kirim Aduan',
                           style: TextStyle(
                             color: Colors.white,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
                         )
@@ -166,55 +168,4 @@ class ComplaintPage extends StatelessWidget {
   }
 }
 
-class TextInput extends StatelessWidget {
 
-  final String placeholder;
-
-  const TextInput({
-    Key? key, required this.placeholder,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: placeholder,
-        contentPadding: const EdgeInsets.all(12),
-        filled: true,
-        border: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          borderSide: BorderSide.none
-        ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          borderSide: BorderSide(
-            color: Pallete.secondary
-          )
-        ),
-        focusColor: Pallete.secondary,
-        fillColor: const Color(0xffF4F5F6)
-      )
-    );
-  }
-}
-
-class InputLabel extends StatelessWidget {
-
-  final String label;
-
-  const InputLabel({
-    Key? key, required this.label,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      label,
-      style: const TextStyle(
-        color: Color(0xFF5B5B5B),
-        fontSize: 14,
-        fontWeight: FontWeight.w600
-      ),
-    );
-  }
-}

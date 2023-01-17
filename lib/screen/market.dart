@@ -1,3 +1,4 @@
+import 'package:desa_getasan_app/components/addProductFAB.dart';
 import 'package:desa_getasan_app/components/marketCard.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,12 @@ class MarketPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final args = ModalRoute.of(context)!.settings.arguments as dynamic;
+
     return Scaffold(
       backgroundColor: Colors.white,
+      floatingActionButton: (args['userProduct']) ? const AddProductFAB() : null,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -64,11 +69,11 @@ class MarketPage extends StatelessWidget {
                           ), 
                           child: const Icon(Icons.arrow_back_ios_new_rounded, size: 15, color: Pallete.primary,),
                         ),
-                        const Padding(
-                          padding: EdgeInsets.only(top: 5, bottom: 8),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, bottom: 8),
                           child: Text(
-                            'Pasar',
-                            style: TextStyle(
+                            (args['userProduct']) ? 'Produk Saya' : 'Pasar',
+                            style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 18,
                               color: Colors.white
@@ -93,7 +98,7 @@ class MarketPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10 ),
-              child: Row(
+              child: (!args['userProduct']) ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
@@ -117,7 +122,7 @@ class MarketPage extends StatelessWidget {
                     onChanged: (newVal) => print(newVal)
                   )
                 ],
-              ),
+              ) : null,
             ),
           ),
           SliverGrid(
@@ -146,4 +151,6 @@ class MarketPage extends StatelessWidget {
     );
   }
 }
+
+
 
