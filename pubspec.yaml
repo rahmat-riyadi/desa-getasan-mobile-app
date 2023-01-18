@@ -78,6 +78,7 @@ flutter:
     - assets/icons/trolly.svg
     - assets/icons/chat.svg
     - assets/icons/notification.svg
+    - assets/icons/lock-circle.svg
     - assets/icons/call.svg
     - assets/placeholder.png
     - assets/header-card-bg.png

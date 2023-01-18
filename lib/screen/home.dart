@@ -18,7 +18,6 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              // height: MediaQuery.of(context).size.height * 0.3,
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
                 color: Pallete.primary,
