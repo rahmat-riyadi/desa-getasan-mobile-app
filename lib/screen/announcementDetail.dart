@@ -1,8 +1,8 @@
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 
-class DetailMarketPage extends StatelessWidget {
-  const DetailMarketPage({super.key});
+class DetailAnnoncement extends StatelessWidget {
+  const DetailAnnoncement({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,36 +58,27 @@ class DetailMarketPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                color: Color(0xff0e153a0d)
-              ),
-              child: const Text(
-                'Barang',
-                style: const TextStyle(fontSize: 12),
-              ),
-            ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
+              padding: const EdgeInsets.only(top: 10, bottom: 7),
               child: Text(
-                'Tas Selempang',
+                '7 Januari 2023',
                 style: TextStyle(
-                  fontSize: 16
+                  fontSize: 14,
+                  color: Color(0xff7B7B7B)
                 ),
               ),
             ),
-            Text(
-              'Rp. 80.000,-',
+            const Text(
+              'Acara Adat Desa Getasan',
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.w700
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 24, bottom: 8),
               child: const Text(
-                'Deskripsi',
+                'Informasi',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w700
@@ -102,45 +93,6 @@ class DetailMarketPage extends StatelessWidget {
                 height: 1.5
               ),
             ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Flexible(
-                    fit: FlexFit.tight,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Pallete.secondary,
-                        fixedSize: const Size.fromHeight(48),
-                        elevation: 0
-                      ),
-                      onPressed: (){}, 
-                      child: const Text(
-                        'Buka Dimarket Place',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16
-                        ),
-                      )
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xff1BD741),
-                        elevation: 0,
-                        fixedSize: const Size(70,48),
-                      ),
-                      onPressed: (){}, 
-                      child: const Icon(Icons.whatsapp, size: 30)
-                    ),
-                  )
-                ],
-              ),
-            )
           ],
         ),
       ),

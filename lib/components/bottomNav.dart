@@ -38,7 +38,7 @@ class BottomNav extends StatelessWidget {
             text: 'Beranda',
           ),
           Stack(
-            clipBehavior: Clip.none,
+            clipBehavior: Clip.none ,
             alignment: Alignment.center,
             children: [
               Positioned(

@@ -150,7 +150,37 @@ class Profil extends StatelessWidget {
                               elevation: 0,
                               fixedSize: const Size(170, 43),
                             ),
-                            onPressed: (){}, 
+                            onPressed: () => showDialog(context: context, builder: (context) => SimpleDialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)
+                              ),
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                                  child: Column(
+                                    children: [
+                                      SvgPicture.asset('assets/icons/done.svg'),
+                                      const Padding(
+                                        padding: EdgeInsets.only(bottom: 7, top: 12),
+                                        child: Text(
+                                          'Sukses',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold
+                                          ),
+                                        ),
+                                      ),
+                                      const Text(
+                                        'Ajuan anda berhasil dikirim',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                )
+                              ],
+                            )), 
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
