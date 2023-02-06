@@ -12,7 +12,8 @@ class ComplaintService {
           headers: {
             'apiKey': 'desagetasan123'
           }
-        )
+        ),
+        data: data
       );
 
       return response.data;

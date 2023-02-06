@@ -99,6 +99,8 @@ flutter:
     - assets/onboarding1.svg
     - assets/onboarding2.svg
     - assets/onboarding3.svg
+    - assets/done.svg
+    - assets/done.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

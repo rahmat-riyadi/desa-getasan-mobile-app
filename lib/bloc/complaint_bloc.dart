@@ -16,7 +16,10 @@ class ComplaintBloc extends Bloc<ComplaintEvent, ComplaintState> {
     
     on<SendComplaintEvent>((event, emit) async {
 
+
       Map<String, dynamic> complaintData = event.complaint.toJson();
+
+      log(complaintData.toString());
 
       final result = await _complaintService.storeComplaint(complaintData);
 
@@ -24,10 +27,13 @@ class ComplaintBloc extends Bloc<ComplaintEvent, ComplaintState> {
 
       if(result['status'] == 'success') {
         emit(ComplaintSended());
+        emit(ComplaintInitial());
       } else {
         emit(ComplaintFailed());
       }
 
+      emit(ComplaintInitial());
+      
     });
 
   }

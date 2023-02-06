@@ -66,7 +66,7 @@ class DetailMarketPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(5),
               decoration: const BoxDecoration(
-                color: Color(0xff0e153a0d)
+                color: Color(0x0E153A0D)
               ),
               child: Text(
                 args.itemBusinessCategory.itemCategory,

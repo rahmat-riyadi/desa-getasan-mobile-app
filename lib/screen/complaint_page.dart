@@ -1,19 +1,37 @@
+import 'dart:developer';
+
 import 'package:desa_getasan_app/bloc/complaint_bloc.dart';
-import 'package:desa_getasan_app/components/input_label.dart';
-import 'package:desa_getasan_app/components/text_input.dart';
+import 'package:desa_getasan_app/components/complaint_form.dart';
+import 'package:desa_getasan_app/components/notif_dialog.dart';
 import 'package:desa_getasan_app/models/complaint.dart';
 import 'package:desa_getasan_app/services/complaint_service.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ComplaintPage extends StatelessWidget {
-  ComplaintPage({super.key});
+class ComplaintPage extends StatefulWidget {
+  const ComplaintPage({super.key});
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController deskriptionController = TextEditingController();
+  @override
+  State<ComplaintPage> createState() => _ComplaintPageState();
+}
+
+class _ComplaintPageState extends State<ComplaintPage> {
+
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,40 +43,27 @@ class ComplaintPage extends StatelessWidget {
           FocusScopeNode currentFocus = FocusScope.of(context);
           if (!currentFocus.hasPrimaryFocus &&
               currentFocus.focusedChild != null) {
-            FocusManager.instance.primaryFocus?.unfocus();
+              FocusManager.instance.primaryFocus?.unfocus();
           }
         },
         child: Scaffold(
           backgroundColor: Pallete.primary,
           body: BlocListener<ComplaintBloc, ComplaintState>(
             listener: (context, state) {
-              
+
               if(state is ComplaintSended){
 
                 showDialog(
                   context: context, 
-                  builder: (context) => const SimpleDialog(
-                    children: [
-                      Text('asdf')
-                    ],
-                  ),
-                );
+                  builder: (context) => const NotifDialog(
+                    title: 'Sukses', 
+                    subtitle: 'Ajuan anda berhasil dikirim', 
+                    image: 'done.svg'
+                  )
+                ).then((value) => Navigator.pop(context));
 
               }
 
-              if(state is ComplaintFailed){
-
-                showDialog(
-                  context: context, 
-                  builder: (context) => const SimpleDialog(
-                    children: [
-                      Text('asdf')
-                    ],
-                  ),
-                );
-
-              }
-              
             },
             child: SizedBox(
               child: Column(
@@ -119,94 +124,48 @@ class ComplaintPage extends StatelessWidget {
                               topRight: Radius.circular(30))),
                       child: Column(
                         children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const InputLabel(label: 'Nama'),
-                              const SizedBox(height: 10),
-                              TextInput(
-                                  placeholder: 'Exp: Putu Gede',
-                                  textEditingController: nameController)
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const InputLabel(label: 'No. Telepon'),
-                              const SizedBox(height: 10),
-                              TextInput(
-                                  placeholder: 'Exp: 0878',
-                                  textEditingController: phoneController)
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const InputLabel(label: 'Email'),
-                              const SizedBox(height: 10),
-                              TextInput(
-                                  placeholder: 'Exp: putuGede@gmail.com',
-                                  textEditingController: emailController)
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const InputLabel(label: 'Deskripsi Aduan'),
-                              const SizedBox(height: 10),
-                              TextField(
-                                  controller: deskriptionController,
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: 5,
-                                  decoration: const InputDecoration(
-                                      hintText: 'Deskripsi',
-                                      contentPadding: EdgeInsets.all(12),
-                                      filled: true,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                          borderSide: BorderSide.none),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                          borderSide: BorderSide(
-                                              color: Pallete.secondary)),
-                                      focusColor: Pallete.secondary,
-                                      fillColor: Color(0xffF4F5F6)))
-                            ],
+                          ComplaintForm(
+                            nameController: nameController, 
+                            phoneController: phoneController,
+                            emailController: emailController,
+                            deskriptionController: descriptionController,
+                            formKey: _formKey,
                           ),
                           const Spacer(),
                           BlocBuilder<ComplaintBloc, ComplaintState>(
                             builder: (context, state) {
                               return ElevatedButton(
-                                  onPressed: () => context
-                                      .read<ComplaintBloc>()
-                                      .add(SendComplaintEvent(Complaint(
-                                        phone: phoneController.text,
-                                        name: nameController.text,
-                                        email: nameController.text,
-                                        description: deskriptionController.text,
-                                        complaintCategoryId: "3",
-                                      ))),
-                                  style: ElevatedButton.styleFrom(
-                                      backgroundColor: Pallete.secondary,
-                                      minimumSize: const Size.fromHeight(45),
-                                      elevation: 0),
-                                  child: const Text(
-                                    'Kirim Aduan',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
-                                    ),
-                                  ));
+                                onPressed: () {
+
+                                  if(_formKey.currentState!.validate()){
+                                    context.read<ComplaintBloc>().add(
+                                    SendComplaintEvent(
+                                        Complaint(
+                                          phone: phoneController.text,
+                                          name: nameController.text,
+                                          email: emailController.text,
+                                          description: descriptionController.text,
+                                          complaintCategoryId: "3",
+                                        )
+                                      )
+                                    );
+                                  } 
+
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Pallete.secondary,
+                                  minimumSize: const Size.fromHeight(45),
+                                  elevation: 0
+                                ),
+                                child: const Text(
+                                  'Kirim Aduan',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                )
+                              );
                             },
                           ),
                         ],
@@ -220,6 +179,5 @@ class ComplaintPage extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

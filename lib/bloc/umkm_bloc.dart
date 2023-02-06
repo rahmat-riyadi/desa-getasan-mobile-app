@@ -16,7 +16,7 @@ class UmkmBloc extends Bloc<UmkmEvent, UmkmState> {
 
       emit(UmkmLoading());
 
-      final result;
+      final dynamic result;
 
       if(event.id == 0){
         result = await _umkmService.getUmkm();

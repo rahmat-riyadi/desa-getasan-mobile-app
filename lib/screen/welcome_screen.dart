@@ -73,23 +73,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                       controller: _controller,
                       children: [
                         Column(
-                          children: [
+                          children: const [
                             HeadingText(title: 'Pesan'),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 20),
                             DescriptionText(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae tellus tempor, vulputate vel dui.')
                           ],
                         ),
                         Column(
-                          children: [
+                          children: const [
                             HeadingText(title: 'Pasar'),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 20),
                             DescriptionText(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae tellus tempor, vulputate vel dui.')
                           ],
                         ),
                         Column(
-                          children: [
+                          children: const [
                             HeadingText(title: 'Aduan'),
-                            const SizedBox(height: 20),
+                            SizedBox(height: 20),
                             DescriptionText(text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vitae tellus tempor, vulputate vel dui.')
                           ],
                         )
@@ -123,9 +123,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
 
 class HeadingText extends StatelessWidget {
   
-  String? title;
+  final String? title;
 
-  HeadingText({super.key, this.title});
+  const HeadingText({super.key, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -141,9 +141,9 @@ class HeadingText extends StatelessWidget {
 
 class DescriptionText extends StatelessWidget {
   
-  String? text;
+  final String? text;
 
-  DescriptionText({super.key, this.text});
+  const DescriptionText({super.key, this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -162,9 +162,9 @@ class DescriptionText extends StatelessWidget {
 
 class SliderIndicator extends StatelessWidget {
 
-  int? length, selected;
+  final int? length, selected;
 
-  SliderIndicator({super.key, this.length, this.selected});
+  const SliderIndicator({super.key, this.length, this.selected});
 
   @override
   Widget build(BuildContext context) {

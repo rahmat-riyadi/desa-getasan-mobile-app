@@ -34,9 +34,9 @@ class CarouselCard extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Row(
-                    children: [
+                    children: const [
                       CarouselSmallTitle(person: 'By Rahmat Riyadi Syam', icon: 'profile-circle.svg'),
-                      const SizedBox(width: 10),
+                      SizedBox(width: 10),
                       CarouselSmallTitle(person: '6 Desember 2022', icon: 'calendar-circle.svg'),
                     ],
                   ),
@@ -60,9 +60,9 @@ class CarouselCard extends StatelessWidget {
 
 class CarouselSmallTitle extends StatelessWidget {
 
-  String person, icon;
+  final String person, icon;
 
-  CarouselSmallTitle({super.key, required this.person, required this.icon});
+  const CarouselSmallTitle({super.key, required this.person, required this.icon});
 
   @override
   Widget build(BuildContext context) {

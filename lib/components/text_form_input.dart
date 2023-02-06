@@ -1,17 +1,19 @@
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 
-class TextInput extends StatelessWidget {
+class TextFormInput extends StatelessWidget {
 
   final String placeholder;
   final TextEditingController textEditingController;
   final bool readonly;
+  final FormFieldValidator<String> validator;
 
-  const TextInput({
+  const TextFormInput({
     Key? key, 
     required this.placeholder, 
     required this.textEditingController, 
     this.readonly = false, 
+    required this.validator, 
   }) : super(key: key);
 
   @override
@@ -39,7 +41,14 @@ class TextInput extends StatelessWidget {
         ),
         focusColor: Pallete.secondary,
         fillColor: const Color(0xffF4F5F6),
+        errorBorder: const OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderSide: BorderSide(
+            color: Colors.red
+          )
+        ),
       ),
+      validator: validator,
     );
   }
 }

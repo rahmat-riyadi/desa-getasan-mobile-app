@@ -28,11 +28,11 @@ void main() {
   //   expect(find.text('1'), findsOneWidget);
   // });
 
-  final _dio = Dio();
+  final dio = Dio();
 
   Future<dynamic> getAnnouncementList() async {
 
-    final response = await _dio.get(
+    final response = await dio.get(
       'cms.desagetasan.id/api/blog/latest',
       options: Options(
         headers: {
