@@ -31,13 +31,13 @@ class AddProductFAB extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.all(3),
-            margin: EdgeInsets.only(left: 10),
-            child: Icon(Icons.add, color: Color(0xff1BD741), size: 25,),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(3),
+            margin: const EdgeInsets.only(left: 10),
+            decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.white
             ),
+            child: const Icon(Icons.add, color: Color(0xff1BD741), size: 25,),
           )
         ],
       ),

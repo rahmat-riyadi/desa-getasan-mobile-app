@@ -3,10 +3,7 @@ import 'package:dio/dio.dart';
 
 class AnnouncementService {
 
-  final _dio = Dio();
-
   Future<List<Announcement>> getAnnouncementList() async {
-
 
     try {
       

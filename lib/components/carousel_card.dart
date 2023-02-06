@@ -42,7 +42,7 @@ class CarouselCard extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Lorem ipsum dolor sit amet consectetur. Dignissim ac quis justo quisque loreore sfsdfsd sdsdf'.substring(0, 65) + '...',
+                  '${'Lorem ipsum dolor sit amet consectetur. Dignissim ac quis justo quisque loreore sfsdfsd sdsdf'.substring(0, 65)}...',
                   maxLines: 2,
                   style: const TextStyle(
                     color: Colors.white,

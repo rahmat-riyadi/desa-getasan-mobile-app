@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class MarketCard extends StatelessWidget {
 
   final int index;
-  final String item, price, category;
+  final String item, price, category, img;
 
   const MarketCard({
-    Key? key, required this.index, required this.item, required this.price, required this.category,
+    Key? key, required this.index, required this.item, required this.price, required this.category, required this.img,
   }) : super(key: key);
 
   @override
@@ -37,10 +37,11 @@ class MarketCard extends StatelessWidget {
                 topRight: Radius.circular(10)
               ),
               child: Image.network(
-                'https://api.lorem.space/image/house?w=250&h=250',
+                'https://cms.desagetasan.id/$img',
                 width: double.maxFinite,
                 height: 120,
                 fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) => const Text('no data'),
               ),
             ),
             Container(
@@ -62,7 +63,7 @@ class MarketCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 5, bottom: 10),
                     child: Text(
-                      '$item $index',
+                      item,
                       style: const TextStyle(
                         fontSize: 14
                       ),
@@ -70,7 +71,7 @@ class MarketCard extends StatelessWidget {
                   ),
                   Text(
                     price,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold
                     ),

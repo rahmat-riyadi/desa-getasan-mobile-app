@@ -1,4 +1,4 @@
-import 'package:desa_getasan_app/components/textInput.dart';
+import 'package:desa_getasan_app/components/text_input.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +8,11 @@ class Profil extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController nameController = TextEditingController();
+    TextEditingController nikController = TextEditingController();
+    TextEditingController desaController = TextEditingController();
+
     return Expanded(
       child: Container(
         decoration: const BoxDecoration(
@@ -113,24 +118,32 @@ class Profil extends StatelessWidget {
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10),
                           child: Text('Nama'),
                         ),
-                        TextInput(placeholder: 'Fidyah Nurfitrah Salsabila')
+                        TextInput(
+                          placeholder: 'bagong', 
+                          textEditingController: nameController,
+                          readonly: true,
+                        )
                       ],
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 10),
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(bottom: 10),
                             child: Text('Nik'),
                           ),
-                          TextInput(placeholder: '60200120116')
+                          TextInput(
+                            placeholder: '60200120116', 
+                            textEditingController: nikController,
+                            readonly: true,
+                          )
                         ],
                       ),
                     ),
@@ -141,7 +154,11 @@ class Profil extends StatelessWidget {
                           padding: EdgeInsets.only(bottom: 10),
                           child: Text('Desa'),
                         ),
-                        const TextInput(placeholder: 'Bima'),
+                        TextInput(
+                          placeholder: 'Bima', 
+                          textEditingController: desaController,
+                          readonly: true,
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: ElevatedButton(

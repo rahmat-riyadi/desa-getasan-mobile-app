@@ -1,4 +1,6 @@
+import 'package:desa_getasan_app/models/user_business_item.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
+import 'package:desa_getasan_app/utils/parser.dart';
 import 'package:flutter/material.dart';
 
 class DetailMarketPage extends StatelessWidget {
@@ -6,6 +8,9 @@ class DetailMarketPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final args = ModalRoute.of(context)!.settings.arguments as UserBusinessItem;
+
     return Scaffold(
       backgroundColor: Pallete.primary,
       appBar: PreferredSize(
@@ -17,9 +22,9 @@ class DetailMarketPage extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
               expandedTitleScale: 5,
               background: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: NetworkImage('https://api.lorem.space/image/house?w=250&h=250'),
+                    image: NetworkImage('https://cms.desagetasan.id/${args.itemImage}'),
                     fit: BoxFit.cover
                   )
                 ),
@@ -63,30 +68,30 @@ class DetailMarketPage extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Color(0xff0e153a0d)
               ),
-              child: const Text(
-                'Barang',
+              child: Text(
+                args.itemBusinessCategory.itemCategory,
                 style: const TextStyle(fontSize: 12),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: Text(
-                'Tas Selempang',
-                style: TextStyle(
+                args.itemName,
+                style: const TextStyle(
                   fontSize: 16
                 ),
               ),
             ),
             Text(
-              'Rp. 80.000,-',
-              style: TextStyle(
+              Parser().rupiahFormatter(args.itemPrice),
+              style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 24, bottom: 8),
-              child: const Text(
+            const Padding(
+              padding: EdgeInsets.only(top: 24, bottom: 8),
+              child: Text(
                 'Deskripsi',
                 style: TextStyle(
                   fontSize: 14,
@@ -95,14 +100,14 @@ class DetailMarketPage extends StatelessWidget {
               ),
             ),
             Text(
-              'Lorem ipsum dolor sit amet consectetur. Vulputate egestas ultrices massa pretium eget. Condimentum nibh dignissim ullamcorper vitae mollis tempor nunc. Rhoncus urna velit nunc integer nunc quisque.',
-              style: TextStyle(
+              Parser().textParser(args.itemDescription),
+              style: const TextStyle(
                 fontSize: 14,
                 color: Color(0xff7B7B7B),
                 height: 1.5
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: Row(

@@ -31,6 +31,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,6 +46,9 @@ dependencies:
   flutter_native_splash: ^2.2.16
   dio: ^4.0.6
   equatable: ^2.0.5
+  intl: ^0.17.0
+  dropdown_button2: ^1.9.2
+  shimmer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +66,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
@@ -83,11 +89,16 @@ flutter:
     - assets/icons/lock-circle.svg
     - assets/icons/call.svg
     - assets/icons/done.svg
+    - assets/icons/calendar.svg
+    - assets/icons/profile.svg
     - assets/placeholder.png
     - assets/header-card-bg.png
     - assets/complaintBtnBg.png
     - assets/market-header.png
     - assets/contactCardBg.png
+    - assets/onboarding1.svg
+    - assets/onboarding2.svg
+    - assets/onboarding3.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

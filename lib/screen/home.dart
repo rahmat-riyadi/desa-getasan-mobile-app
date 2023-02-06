@@ -1,8 +1,11 @@
+import 'package:desa_getasan_app/bloc/agenda_bloc.dart';
 import 'package:desa_getasan_app/bloc/announcement_bloc.dart';
-import 'package:desa_getasan_app/components/announcementList.dart';
-import 'package:desa_getasan_app/components/emergencyContactCard.dart';
-import 'package:desa_getasan_app/components/exploreCard.dart';
-import 'package:desa_getasan_app/models/announcement.dart';
+import 'package:desa_getasan_app/components/agenda_card.dart';
+import 'package:desa_getasan_app/components/agenda_skeleton.dart';
+import 'package:desa_getasan_app/components/announcement_list.dart';
+import 'package:desa_getasan_app/components/emergency_contact_card.dart';
+import 'package:desa_getasan_app/components/explore_card.dart';
+import 'package:desa_getasan_app/components/home_header.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:desa_getasan_app/utils/parser.dart';
 import 'package:flutter/material.dart';
@@ -19,88 +22,7 @@ class Home extends StatelessWidget {
       decoration: const BoxDecoration(color: Pallete.primary),
       child: Column(
         children: [
-          Container(
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
-                color: Pallete.primary,
-              ),
-              child: SafeArea(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RichText(
-                            maxLines: 1,
-                            text: const TextSpan(
-                                text: 'Hallo, ',
-                                style: TextStyle(fontSize: 15),
-                                children: [
-                                  TextSpan(
-                                    text: 'Putu Gede!',
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.w700),
-                                  )
-                                ])),
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            SvgPicture.asset('assets/icons/notification.svg'),
-                            Positioned(
-                                left: 10,
-                                bottom: 15,
-                                child: Container(
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: const BoxDecoration(
-                                        color: Color(0xffFFAB00),
-                                        shape: BoxShape.circle),
-                                    child: const Text(
-                                      '3',
-                                      style: TextStyle(
-                                          fontSize: 11,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    )))
-                          ],
-                        )
-                      ],
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(top: 20, bottom: 5),
-                      padding: const EdgeInsets.all(30),
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage('assets/header-card-bg.png'),
-                              fit: BoxFit.cover)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              'Selamat Datang',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.white),
-                            ),
-                          ),
-                          Text(
-                            'di Sistem Pelayanan\nDesa Getasan',
-                            style: TextStyle(
-                                fontSize: 14,
-                                // fontWeight: FontWeight.w900,
-                                color: Colors.white),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              )),
+          const HomeHeader(),
           Expanded(
               child: Container(
             padding: const EdgeInsets.only(bottom: 30),
@@ -204,23 +126,86 @@ class Home extends StatelessWidget {
                         )
                       ],
                     )),
+                const SectionTitle(title: 'Agenda'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: BlocBuilder<AgendaBloc, AgendaState>(
+                    builder: (context, state) {
+
+                      if(state is AgendaLoaded){
+
+                        if(state.agendas.isEmpty){
+                          return Container(
+                            color: const Color(0xffF4F5F6),
+                            height: 70,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.hourglass_empty_rounded),
+                                Text('Tidak Ada Agenda')
+                              ],
+                            ),
+                          );
+                        }
+
+                        return Column(
+                          children: state.agendas.map( (e) => AgendaCard(
+                            title: e.title, 
+                            description: e.description, 
+                            month: e.month, 
+                            dateNum: e.dateNum,
+                            day: e.day,
+                            author: e.author
+                          )).toList(),
+                        );
+                      }
+
+                      if(state is AgendaFailed){
+                        return Container(
+                            color: const Color(0xffF4F5F6),
+                            height: 70,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: const [
+                                Icon(Icons.announcement_rounded),
+                                Text('Tidak Ada Agenda')
+                              ],
+                            ),
+                          );
+                      }
+
+                      return Column(
+                        children: const [
+                          AgendaSekeleton(),
+                          AgendaSekeleton()
+                        ],
+                      );
+                      
+                    },
+                  ),
+                ),
                 const SectionTitle(title: 'Pengumuman'),
                 const SizedBox(height: 20),
                 BlocBuilder<AnnouncementBloc, AnnouncementState>(
                   builder: (context, state) {
-
-                    if(state is AnnouncementLoaded){
+                    if (state is AnnouncementLoaded) {
                       return Column(
-                        children: state.announcements.map((e) => GestureDetector(
-                            onTap: () => Navigator.pushNamed(context, '/announcementDetail'),
-                            child: AnnouncementList(
-                              title: e.title,
-                              date: e.date.toLocal().toString(),
-                              desc: Parser().textParser(e.description),
-                              img: e.image.toString(),
-                            ),
-                          )
-                        ).toList(),
+                        children: state.announcements
+                            .map((e) => GestureDetector(
+                                  onTap: () => Navigator.pushNamed(
+                                      context, '/announcementDetail',
+                                      arguments: e),
+                                  child: AnnouncementList(
+                                    title: e.title,
+                                    date: e.date,
+                                    desc: Parser().textParser(e.description),
+                                    img: e.image.toString(),
+                                    author: e.updatedBy,
+                                  ),
+                                ))
+                            .toList(),
                       );
                     }
 

@@ -5,12 +5,10 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:desa_getasan_app/models/announcement.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'dart:developer';
 
-import 'package:desa_getasan_app/main.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -43,11 +41,11 @@ void main() {
       )
     );
 
-    List<Announcement> announcements = response.data.data.map<Announcement>(
-      (e) => Announcement.fromJson(e)
-    );
+    // List<Announcement> announcements = response.data.data.map<Announcement>(
+    //   (e) => Announcement.fromJson(e)
+    // );
 
-    print(response);
+    log(response.toString());
     return response;
 
   }

@@ -4,17 +4,23 @@ import 'package:flutter/material.dart';
 class TextInput extends StatelessWidget {
 
   final String placeholder;
+  final TextEditingController textEditingController;
+  final bool readonly;
 
   const TextInput({
-    Key? key, required this.placeholder,
+    Key? key, required this.placeholder, 
+    required this.textEditingController, 
+    this.readonly = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      readOnly: readonly,
+      controller: textEditingController,
       decoration: InputDecoration(
         hintText: placeholder,
-        hintStyle: TextStyle(
+        hintStyle: const TextStyle(
           color: Color(0xff9B9B9B),
           fontSize: 14,
         ),

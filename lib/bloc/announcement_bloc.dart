@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:desa_getasan_app/models/announcement.dart';
-import 'package:desa_getasan_app/services/announcementService.dart';
+import 'package:desa_getasan_app/services/announcement_service.dart';
 import 'package:equatable/equatable.dart';
 
 part 'announcement_event.dart';

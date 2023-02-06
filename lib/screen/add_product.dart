@@ -1,5 +1,5 @@
-import 'package:desa_getasan_app/components/inputLabel.dart';
-import 'package:desa_getasan_app/components/textInput.dart';
+import 'package:desa_getasan_app/components/input_label.dart';
+import 'package:desa_getasan_app/components/text_input.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +8,12 @@ class AddProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    TextEditingController productController = TextEditingController();
+    TextEditingController priceController = TextEditingController();
+    TextEditingController numberController = TextEditingController();
+    TextEditingController linkController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: CustomScrollView(
@@ -98,15 +104,15 @@ class AddProductPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(bottom: 14),
+                    margin: const EdgeInsets.only(bottom: 14),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10),
                           child: InputLabel(label: 'Nama Produk'),
                         ),
-                        TextInput(placeholder: 'Exp: Sabun Mandi')
+                        TextInput(placeholder: 'Exp: Sabun Mandi', textEditingController: productController)
                       ],
                     ),
                   ),
@@ -135,8 +141,8 @@ class AddProductPage extends StatelessWidget {
                             ),
                             items: const [
                               DropdownMenuItem(
-                                child: Text('Barang'),
                                 value: '',
+                                child: Text('Barang'),
                               ),
                             ], 
                             onChanged: (value) {}
@@ -149,12 +155,12 @@ class AddProductPage extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 14),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Padding(
+                      children: [
+                        const Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: InputLabel(label: 'Harga'),
                         ),
-                        TextInput(placeholder: 'Exp: 12.000')
+                        TextInput(placeholder: 'Exp: 12.000', textEditingController: priceController,)
                       ],
                     ),
                   ),
@@ -162,12 +168,12 @@ class AddProductPage extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 14),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Padding(
+                      children: [
+                        const Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: InputLabel(label: 'No.Whatsapp'),
                         ),
-                        TextInput(placeholder: 'Exp: 087891')
+                        TextInput(placeholder: 'Exp: 087891', textEditingController: numberController,)
                       ],
                     ),
                   ),
@@ -175,12 +181,12 @@ class AddProductPage extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 14),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Padding(
+                      children: [
+                        const Padding(
                           padding: EdgeInsets.only(bottom: 10),
                           child: InputLabel(label: 'Link Marketplace'),
                         ),
-                        TextInput(placeholder: 'Exp: https://metro')
+                        TextInput(placeholder: 'Exp: https://metro', textEditingController: linkController)
                       ],
                     ),
                   ),
