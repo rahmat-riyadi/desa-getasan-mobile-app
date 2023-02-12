@@ -30,7 +30,7 @@ class UmkmService {
     try {
       
       final response = await Dio().get(
-        'https://cms.desagetasan.id/api/umkm?page=$page',
+        'https://cms.desagetasan.id/api/umkm?page=$page&category_id=$category',
         options: Options(
           headers: {
             'apiKey': 'desagetasan123'

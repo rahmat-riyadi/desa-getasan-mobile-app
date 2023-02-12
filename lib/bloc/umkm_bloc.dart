@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:desa_getasan_app/models/umkm_data.dart';
 import 'package:desa_getasan_app/services/umkm_service.dart';
@@ -21,8 +23,10 @@ class UmkmBloc extends Bloc<UmkmEvent, UmkmState> {
       if(event.id == 0){
         result = await _umkmService.getUmkm();
       } else {
-        result = await _umkmService.getUmkm();
+        result = await _umkmService.getUmkmByCategory(event.id);
       }
+
+      log(result.toString());
 
       if(result['status'] == 'success'){
 

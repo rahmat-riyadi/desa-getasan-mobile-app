@@ -1,5 +1,7 @@
+import 'package:desa_getasan_app/bloc/user_bloc.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeHeader extends StatelessWidget {
@@ -20,18 +22,29 @@ class HomeHeader extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  RichText(
-                      maxLines: 1,
-                      text: const TextSpan(
-                          text: 'Hallo, ',
-                          style: TextStyle(fontSize: 15),
-                          children: [
-                            TextSpan(
-                              text: 'Putu Gede!',
-                              style:
-                                  TextStyle(fontWeight: FontWeight.w700),
-                            )
-                          ])),
+                  BlocBuilder<UserBloc, UserState>(
+                    builder: (context, state) {
+
+                      if(state is UserLoaded){
+                        return RichText(
+                          maxLines: 1,
+                          text: TextSpan(
+                            text: 'Hallo, ',
+                            style: const TextStyle(fontSize: 15),
+                            children: [
+                              TextSpan(
+                                text: state.user.namaLengkap.toString(),
+                                style: const TextStyle(fontWeight: FontWeight.w700),
+                              )
+                            ]
+                          )
+                        );
+                      }
+
+                      return const Text('asdf');
+
+                    },
+                  ),
                   Stack(
                     clipBehavior: Clip.none,
                     children: [

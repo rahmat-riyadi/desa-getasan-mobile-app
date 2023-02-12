@@ -93,14 +93,8 @@ class MarketCard extends StatelessWidget {
                     fontWeight: FontWeight.bold
                   ),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0,
-                    padding: EdgeInsets.zero,
-                    fixedSize: const Size.fromHeight(10)
-                  ),
-                  onPressed: (){}, 
+                Padding(
+                  padding: const EdgeInsets.only(top: 13),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: const [
@@ -114,7 +108,7 @@ class MarketCard extends StatelessWidget {
                       SizedBox(width: 10),
                       Icon(Icons.arrow_forward_ios_rounded, size: 15, color: Pallete.secondary,)
                     ],
-                  )
+                  ),
                 )
               ],
             ),

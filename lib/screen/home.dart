@@ -11,6 +11,7 @@ import 'package:desa_getasan_app/utils/parser.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -43,7 +44,7 @@ class Home extends StatelessWidget {
                       Flexible(
                         fit: FlexFit.tight,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () => _openTorismMap(context),
                           child: const ExploreCard(
                             icon: 'map.svg',
                             title: 'Tourism Map',
@@ -221,6 +222,23 @@ class Home extends StatelessWidget {
       ),
     ));
   }
+
+  Future<void> _openTorismMap(context) async {
+
+    Uri url = Uri.parse('https://map.desagetasan.id/');
+
+    if(await canLaunchUrl(url)){
+      await launchUrl(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Url gagal dibuka')
+        )
+      );
+    }
+
+  }
+
 }
 
 class SectionTitle extends StatelessWidget {

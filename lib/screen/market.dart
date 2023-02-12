@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:js';
 
 import 'package:desa_getasan_app/bloc/umkm_bloc.dart';
 import 'package:desa_getasan_app/bloc/umkm_category_bloc.dart';
@@ -15,11 +16,29 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MarketPage extends StatelessWidget {
-  const MarketPage({super.key});
+
+MarketPage({super.key});
+
+  final ScrollController controller = ScrollController();
+
+  void onScroll(){
+
+    double maxScroll = controller.position.maxScrollExtent;
+    double currentScroll = controller.position.pixels;
+
+    if(maxScroll == currentScroll){
+      log('last');
+      
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
+
     final args = ModalRoute.of(context)!.settings.arguments as dynamic;
+
+    controller.addListener(onScroll);
 
     return MultiBlocProvider(
       providers: [
@@ -185,8 +204,13 @@ class MarketPage extends StatelessWidget {
                       }
               
                       if (state is UmkmLoaded) {
+
+                        // if(state.umkmData.result.isEmpty){
+
+                        // }
               
                         return GridView.builder(
+                          controller: controller,
                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             mainAxisSpacing: 20,
@@ -246,8 +270,8 @@ class MarketHeader extends StatelessWidget {
       underline: Container(),
       value: selectedCategory.id,
       onChanged: (newVal){
-        log(newVal.toString());
         context.read<UmkmCategoryBloc>().add(ChangeUmkmCategory(itemCategories, newVal!));
+        context.read<UmkmBloc>().add(LoadUmkmEvent(id: newVal));
       },
       customButton: Container(
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 7),

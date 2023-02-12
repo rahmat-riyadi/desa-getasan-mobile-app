@@ -1,3 +1,4 @@
+import 'package:desa_getasan_app/bloc/user_bloc.dart';
 import 'package:desa_getasan_app/l10n/l10n.dart';
 import 'package:desa_getasan_app/screen/add_product.dart';
 import 'package:desa_getasan_app/screen/announcement_detail.dart';
@@ -9,6 +10,7 @@ import 'package:desa_getasan_app/screen/market.dart';
 import 'package:desa_getasan_app/screen/welcome_screen.dart';
 import 'package:desa_getasan_app/services/agenda_service.dart';
 import 'package:desa_getasan_app/services/announcement_service.dart';
+import 'package:desa_getasan_app/services/authentication_service.dart';
 import 'package:desa_getasan_app/services/complaint_service.dart';
 import 'package:desa_getasan_app/services/umkm_service.dart';
 import 'package:flutter/material.dart';
@@ -35,25 +37,27 @@ class MyApp extends StatelessWidget {
           RepositoryProvider(create: (context) => AnnouncementService()),
           RepositoryProvider(create: (context) => UmkmService()),
           RepositoryProvider(create: (context) => AgendaService()),
-          RepositoryProvider(create: (context) => ComplaintService())
+          RepositoryProvider(create: (context) => ComplaintService()),
+          RepositoryProvider(create: (context) => AuthenticationService())
         ],
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          supportedLocales: L10n.all,
-          routes: {
-            '/login' : (context) => const LoginPage(),
-            '/home': (context) => const Index(),
-            '/market' :(context) => const MarketPage(),
-            '/detailMarket' :(context) => const DetailMarketPage(),
-            '/complaint' :(context) => ComplaintPage(),
-            '/addProduct' :(context) => const AddProductPage(),
-            '/announcementDetail' :(context) => const DetailAnnoncement(),
-          },
-          theme: ThemeData(
-            textTheme: GoogleFonts.plusJakartaSansTextTheme()
+        child: BlocProvider(
+          create: (context) => UserBloc(),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            supportedLocales: L10n.all,
+            routes: {
+              '/login': (context) => const LoginPage(),
+              '/home': (context) => const Index(),
+              '/market': (context) => MarketPage(),
+              '/detailMarket': (context) => const DetailMarketPage(),
+              '/complaint': (context) => const ComplaintPage(),
+              '/addProduct': (context) => const AddProductPage(),
+              '/announcementDetail': (context) => const DetailAnnoncement(),
+            },
+            theme: ThemeData(textTheme: GoogleFonts.plusJakartaSansTextTheme()),
+            title: 'Desa Getasan',
+            home: const WelcomeScreen(),
           ),
-          title: 'Desa Getasan',
-          home: const WelcomeScreen()
         ),
       ),
     );
