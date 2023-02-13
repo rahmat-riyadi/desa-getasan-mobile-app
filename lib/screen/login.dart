@@ -74,11 +74,12 @@ class _LoginPageState extends State<LoginPage> {
                       )
                     ],
                   ),
-                  duration: const Duration(milliseconds: 2300),
+                  duration: const Duration(milliseconds: 1800),
                   icon: const Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: Icon(Icons.done_rounded, color: Color(0xff379237)),
                   ),
+                  animationDuration: const Duration(milliseconds: 300),
                 ).show(context).then((value) => Navigator.of(context).pushNamed('/home'));
               }
 

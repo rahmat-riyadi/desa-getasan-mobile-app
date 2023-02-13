@@ -9,10 +9,17 @@ abstract class UmkmEvent extends Equatable {
 
 class LoadUmkmEvent extends UmkmEvent {
   final int id;
+  final int currentPage;
+  final bool isFirst;
 
-  const LoadUmkmEvent({this.id = 0});
+  const LoadUmkmEvent({this.id = 0, this.isFirst = false, this.currentPage = 1});
 
   @override
-  List<Object> props() => [id];
+  List<Object> props() => [id, isFirst];
 }
 
+// class LoadUmkmByUserEvent extends UmkmEvent {
+
+//   final int id;
+
+// }
