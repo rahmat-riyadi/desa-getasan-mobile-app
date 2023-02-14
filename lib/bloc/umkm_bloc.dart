@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:desa_getasan_app/models/umkm_data.dart';
 import 'package:desa_getasan_app/models/user_business_item.dart';

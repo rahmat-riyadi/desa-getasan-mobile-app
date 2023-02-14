@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:desa_getasan_app/bloc/user_bloc.dart';
 import 'package:desa_getasan_app/components/text_input.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profil extends StatelessWidget {
   const Profil({super.key});
@@ -156,43 +159,7 @@ class Profil extends StatelessWidget {
                                 elevation: 0,
                                 fixedSize: const Size(170, 43),
                               ),
-                              onPressed: () => showDialog(
-                                  context: context,
-                                  builder: (context) => SimpleDialog(
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        children: [
-                                          Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 20,
-                                                      horizontal: 20),
-                                              child: Column(
-                                                children: [
-                                                  SvgPicture.asset(
-                                                      'assets/icons/done.svg'),
-                                                  const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 7, top: 12),
-                                                    child: Text(
-                                                      'Sukses',
-                                                      style: TextStyle(
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                  const Text(
-                                                    'Ajuan anda berhasil dikirim',
-                                                    style: TextStyle(
-                                                      fontSize: 14,
-                                                    ),
-                                                  )
-                                                ],
-                                              ))
-                                        ],
-                                      )),
+                              onPressed: () => Navigator.of(context).pushNamed('/changePassword', arguments: state.user.uuid),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -224,14 +191,21 @@ class Profil extends StatelessWidget {
                                     BorderRadius.all(Radius.circular(5)),
                                 side: BorderSide(
                                     color: Color(0xff00AAE1), width: 1.5))),
-                        onPressed: () {},
+                        onPressed: () async {
+                          final SharedPreferences pref = await SharedPreferences.getInstance();
+                          pref.remove('userData').then((value) {
+                            return Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+                          });
+                          // context.read<UserBloc>().add(LogoutUserEvent());
+                        },
                         child: const Text(
                           'Log Out',
                           style: TextStyle(
                               color: Color(0xff00AAE1),
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
-                        )),
+                        )
+                      ),
                     const SizedBox(
                       height: 10,
                     )

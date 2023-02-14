@@ -55,8 +55,7 @@ class Home extends StatelessWidget {
                       Flexible(
                         fit: FlexFit.tight,
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/market',
-                              arguments: {'userProduct': false}),
+                          onTap: () => Navigator.pushNamed(context, '/market', arguments: false),
                           child: const ExploreCard(
                             icon: 'market.svg',
                             title: 'Pasar',
@@ -67,8 +66,7 @@ class Home extends StatelessWidget {
                       Flexible(
                         fit: FlexFit.tight,
                         child: GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/market',
-                              arguments: {'userProduct': true}),
+                          onTap: () => Navigator.pushNamed(context, '/market', arguments: true),
                           child: const ExploreCard(
                             icon: 'trolly.svg',
                             title: 'Produk Saya',

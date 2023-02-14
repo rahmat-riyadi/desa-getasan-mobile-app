@@ -48,6 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               if(state is AuthenticationSuccess){
 
                 context.read<UserBloc>().add(EmitUserDataEvent(state.user));
+                
                 Flushbar(
                   padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
                   margin: const EdgeInsets.symmetric(horizontal: 20),

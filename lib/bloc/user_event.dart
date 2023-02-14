@@ -11,6 +11,10 @@ class LoadingUserDataEvent extends UserEvent {}
 
 class LoadUserDataEvent extends UserEvent {}
 
+class CheckUserDataEvent extends UserEvent {}
+
+class LogoutUserEvent extends UserEvent {}
+
 class EmitUserDataEvent extends UserEvent {
 
   final User user;

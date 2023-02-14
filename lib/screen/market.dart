@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:desa_getasan_app/bloc/umkm_bloc.dart';
 import 'package:desa_getasan_app/bloc/umkm_category_bloc.dart';
 import 'package:desa_getasan_app/components/add_product_fab.dart';
@@ -13,28 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MarketPage extends StatelessWidget {
 
-MarketPage({super.key});
+  const MarketPage({super.key, required this.userProduct});
 
-  final ScrollController controller = ScrollController();
-
-  void onScroll(){
-
-    double maxScroll = controller.position.maxScrollExtent;
-    double currentScroll = controller.position.pixels;
-
-    if(maxScroll == currentScroll){
-      log('last');
-      
-    }
-
-  }
+  final bool userProduct;
 
   @override
   Widget build(BuildContext context) {
-
-    final args = ModalRoute.of(context)!.settings.arguments as dynamic;
-
-    controller.addListener(onScroll);
 
     return MultiBlocProvider(
       providers: [
@@ -43,7 +25,7 @@ MarketPage({super.key});
       ],
       child: Scaffold(
         backgroundColor: Pallete.primary,
-        floatingActionButton: (args['userProduct']) ? const AddProductFAB() : null,
+        floatingActionButton: (userProduct) ? const AddProductFAB() : null,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.15),
           child: AppBar(
@@ -83,7 +65,7 @@ MarketPage({super.key});
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: Text(
-                            (args['userProduct']) ? 'Produk Saya' : 'Pasar',
+                            (userProduct) ? 'Produk Saya' : 'Pasar',
                             style: const TextStyle(
                               fontWeight: FontWeight.w700,
                               fontSize: 31,
