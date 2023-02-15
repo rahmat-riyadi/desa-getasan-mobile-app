@@ -1,11 +1,11 @@
 import 'package:desa_getasan_app/bloc/umkm_bloc.dart';
 import 'package:desa_getasan_app/bloc/umkm_category_bloc.dart';
+import 'package:desa_getasan_app/components/market_header_skeleton.dart';
 import 'package:desa_getasan_app/components/market_list.dart';
 import 'package:desa_getasan_app/components/market_skeleton.dart';
-import 'package:desa_getasan_app/screen/market.dart';
+import 'package:desa_getasan_app/screen/market_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 
 class MarketBody extends StatefulWidget {
 
@@ -30,7 +30,8 @@ class _MarketBodyState extends State<MarketBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      width: double.maxFinite,
+      // padding: const EdgeInsets.all(20),
       decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -39,15 +40,20 @@ class _MarketBodyState extends State<MarketBody> {
         )
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Lihat Berdasarkan',
-                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                const Padding(
+                  padding: EdgeInsets.all(20),
+                  child: Text(
+                    'Produk',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
                 ),
                 BlocBuilder<UmkmCategoryBloc, UmkmCategoryState>(
                   builder: (context, state) {
@@ -70,43 +76,7 @@ class _MarketBodyState extends State<MarketBody> {
                       return const Text('failed');
                     }
 
-                    return Shimmer(
-                      gradient: const LinearGradient(
-                        colors: [
-                          Color(0xFFEBEBF4),
-                          Color(0xFFF4F4F4),
-                          Color(0xFFEBEBF4),
-                        ],
-                        stops: [
-                          0.1,
-                          0.3,
-                          0.4,
-                        ],
-                        begin: Alignment(-1.0, -0.3),
-                        end: Alignment(1.0, 0.3),
-                        tileMode: TileMode.clamp,
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 7),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: const Color(0xffEAEAEA)
-                          ),
-                          borderRadius: BorderRadius.circular(5)
-                        ),
-                        // width: 110,
-                        child: Opacity(
-                          opacity: 0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
-                              Text('loading'),
-                              Icon(Icons.keyboard_arrow_down_rounded, size: 30,)
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
+                    return const MarketHeaderSkeleton();
                   },
                 ),
               ],
@@ -130,10 +100,25 @@ class _MarketBodyState extends State<MarketBody> {
                   }
           
                   if (state is UmkmLoaded) {
-                    return MarketList(controller: _scrollController, state: state);
+                    return Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: 20,
+                        left: 20,
+                        right: 20
+                      ),
+                      child: MarketList(controller: _scrollController, state: state),
+                    );
+                    // return Text('data');
                   }
           
-                  return const MarketSkeleton();
+                  return const Padding(
+                      padding: EdgeInsets.only(
+                        bottom: 20,
+                        left: 20,
+                        right: 20
+                      ),
+                      child: MarketSkeleton(),
+                    );
 
                 },
               ),

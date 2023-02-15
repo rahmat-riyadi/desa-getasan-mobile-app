@@ -38,7 +38,7 @@ class MarketList extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing: 20,
         crossAxisSpacing: 20,
-        childAspectRatio: 0.7,
+        childAspectRatio: 0.85,
       ), 
       itemBuilder: (context, index) {
 
@@ -107,7 +107,6 @@ class MarketList extends StatelessWidget {
                     ],
                   ),
                 ),
-                
               ],
             ),
           );

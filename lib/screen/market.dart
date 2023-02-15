@@ -2,10 +2,8 @@ import 'package:desa_getasan_app/bloc/umkm_bloc.dart';
 import 'package:desa_getasan_app/bloc/umkm_category_bloc.dart';
 import 'package:desa_getasan_app/components/add_product_fab.dart';
 import 'package:desa_getasan_app/components/market_body.dart';
-import 'package:desa_getasan_app/models/item_business_category.dart';
 import 'package:desa_getasan_app/services/umkm_service.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -82,58 +80,6 @@ class MarketPage extends StatelessWidget {
           ),
         ),
         body: const MarketBody(),
-      ),
-    );
-  }
-}
-
-class MarketHeader extends StatelessWidget {
-
-  const MarketHeader({ 
-    Key? key,
-    required this.itemCategories, 
-    required this.selectedCategory
-  }) : super(key: key);
-
-  final ItemBusinessCategory selectedCategory;
-  final List<ItemBusinessCategory> itemCategories;
-
-  @override
-  Widget build(BuildContext context) {
-    return  DropdownButton2(
-      items: itemCategories.map(
-        (e) => DropdownMenuItem(
-          value: e.id,
-          child: Text(e.itemCategory),
-        )
-      ).toList(), 
-      underline: Container(),
-      value: selectedCategory.id,
-      onChanged: (newVal){
-        context.read<UmkmCategoryBloc>().add(ChangeUmkmCategory(itemCategories, newVal!));
-        context.read<UmkmBloc>().add(LoadUmkmEvent(id: newVal));
-      },
-      customButton: Container(
-        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 7),
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: const Color(0xffEAEAEA)
-          ),
-          borderRadius: BorderRadius.circular(5)
-        ),
-        // width: 110,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(selectedCategory.itemCategory),
-            const Icon(Icons.keyboard_arrow_down_rounded, size: 30,)
-          ],
-        ),
-      ),
-      dropdownWidth: 150,
-      dropdownDirection: DropdownDirection.left,
-      dropdownDecoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10)
       ),
     );
   }
