@@ -87,7 +87,7 @@ class _MarketBodyState extends State<MarketBody> {
               padding: const EdgeInsets.only(top: 10),
               child: BlocBuilder<UmkmBloc, UmkmState>(
                 builder: (context, state) {
-          
+                  
                   if (state is UmkmFailed) {
                     return SliverToBoxAdapter(
                       child: Center(
@@ -124,6 +124,7 @@ class _MarketBodyState extends State<MarketBody> {
               ),
             ),
           ),
+          // sta
         ],
       ),
     );

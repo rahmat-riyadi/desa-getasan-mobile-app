@@ -29,7 +29,7 @@ class RouteGenerator {
       case '/market':
         return MaterialPageRoute(builder: (context) => MarketPage(userProduct: args));
       case '/detailMarket':
-        return MaterialPageRoute(builder: (context) => const DetailMarketPage());
+        return MaterialPageRoute(builder: (context) => DetailMarketPage(umkm: args));
       case '/complaint':
         return MaterialPageRoute(builder: (context) => const ComplaintPage());
       case '/addProduct':

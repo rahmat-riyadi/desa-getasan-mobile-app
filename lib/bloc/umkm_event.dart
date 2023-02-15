@@ -8,9 +8,11 @@ abstract class UmkmEvent extends Equatable {
 }
 
 class LoadUmkmEvent extends UmkmEvent {
+
+  final bool changeCategory;
   final int id;
 
-  const LoadUmkmEvent({this.id = 0});
+  const LoadUmkmEvent({this.id = 0, this.changeCategory = false});
 
   @override
   List<Object> props() => [id];

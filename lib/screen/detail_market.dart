@@ -2,59 +2,41 @@ import 'package:desa_getasan_app/models/user_business_item.dart';
 import 'package:desa_getasan_app/utils/pallete.dart';
 import 'package:desa_getasan_app/utils/parser.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class DetailMarketPage extends StatelessWidget {
-  const DetailMarketPage({super.key});
+  const DetailMarketPage({super.key, required this.umkm});
+
+  final UserBusinessItem umkm;
 
   @override
   Widget build(BuildContext context) {
 
-    final args = ModalRoute.of(context)!.settings.arguments as UserBusinessItem;
-
     return Scaffold(
-      backgroundColor: Pallete.primary,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
-        child: SafeArea(
-          child: AppBar(
-            elevation: 0,
-            automaticallyImplyLeading: false,
-            flexibleSpace: FlexibleSpaceBar(
-              expandedTitleScale: 5,
-              background: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: NetworkImage('https://cms.desagetasan.id/${args.itemImage}'),
-                    fit: BoxFit.cover
-                  )
-                ),
-              ),
-              title: Container(
-                height: MediaQuery.of(context).size.height * 0.3,
-                padding: const EdgeInsets.only(top: 16, left: 16),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        elevation: 0,
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.all(15),
-                        minimumSize: const Size(0, 0),
-                      ), 
-                      child: const Icon(Icons.arrow_back_ios_new_rounded, size: 15, color: Colors.black,),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,  
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Pallete.text),
+          onPressed: () => Navigator.pop(context),
+        ),
+        centerTitle: true,
+        title: const Text(
+          'Detail Produk',
+          style: TextStyle(
+            color: Pallete.text
           ),
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+          bottom: 20,
+          top: 10
+        ),
         width: double.maxFinite,
         height: double.maxFinite,
         decoration: const BoxDecoration(
@@ -63,31 +45,46 @@ class DetailMarketPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                color: Color(0x0E153A0D)
-              ),
-              child: Text(
-                args.itemBusinessCategory.itemCategory,
-                style: const TextStyle(fontSize: 12),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: Text(
-                args.itemName,
-                style: const TextStyle(
-                  fontSize: 16
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Hero(
+                tag: 'umkm${umkm.itemImage}',
+                child: Image.network(
+                  'https://cms.desagetasan.id/${umkm.itemImage}',
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
-            Text(
-              Parser().rupiahFormatter(args.itemPrice),
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700
+            Container(
+              margin: const EdgeInsets.only(top: 30, bottom: 10),
+              padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+              decoration: BoxDecoration(
+                color: Pallete.primary.withOpacity(0.8),
+                borderRadius: BorderRadius.circular(4)
               ),
+              child: Text(
+                umkm.itemBusinessCategory.itemCategory,
+                style: const TextStyle(fontSize: 12, color: Colors.white),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  umkm.itemName,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    color: Pallete.text
+                  ),
+                ),
+                Text(
+                  Parser().rupiahFormatter(umkm.itemPrice),
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold
+                  ),
+                ),
+              ],
             ),
             const Padding(
               padding: EdgeInsets.only(top: 24, bottom: 8),
@@ -100,7 +97,7 @@ class DetailMarketPage extends StatelessWidget {
               ),
             ),
             Text(
-              Parser().textParser(args.itemDescription),
+              Parser().textParser(umkm.itemDescription),
               style: const TextStyle(
                 fontSize: 14,
                 color: Color(0xff7B7B7B),

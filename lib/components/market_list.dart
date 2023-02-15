@@ -34,6 +34,7 @@ class MarketList extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       controller: controller,
+      shrinkWrap: true,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         mainAxisSpacing: 20,
@@ -43,77 +44,93 @@ class MarketList extends StatelessWidget {
       itemBuilder: (context, index) {
 
         if(index >= state.userBusinessItem.length){
-          return Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
-              boxShadow : const [
-                BoxShadow(
-                  color: Color.fromRGBO(123, 123, 123, 0.10000000149011612),
-                  offset: Offset(1,1),
-                  blurRadius: 12
+          return Stack(
+            children: [
+              Shimmer(
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 204, 204, 204),
+                    Color.fromARGB(255, 199, 199, 199),
+                    Color.fromARGB(255, 219, 219, 219),
+                  ],
+                  stops: [
+                    0.1,
+                    0.3,
+                    0.4,
+                  ],
+                  begin: Alignment(-1.0, -0.3),
+                  end: Alignment(1.0, 0.3),
+                  tileMode: TileMode.clamp,
+                ),
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 212, 212, 212),
+                        borderRadius: BorderRadius.circular(10)
+                      ),
                 )
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Shimmer(
-                  gradient: gradient,
-                  child: Container(
-                    height: 120,
-                    color: Colors.white,
-                  ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(
+                  left: 20,
+                  right: 20,
+                  top: 10,
+                  bottom: 25
                 ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Shimmer(
+                          gradient: gradient,
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            decoration: BoxDecoration(
+                            color: Colors.white,
+                              borderRadius: BorderRadius.circular(5)
+                            ),
+                            height: 17,
+                            width: 50,
+                          ),
+                        )
+                      ],
+                    ),
+                    const Spacer(),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                       Shimmer(
                         gradient: gradient,
                         child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 10),
-                          height: 10,
                           width: 40,
-                          color: Colors.white,
+                          height: 10,
+                          color: Colors.red,
                         ),
                       ),
+                      const SizedBox(height: 10,),
                       Shimmer(
                         gradient: gradient,
                         child: Container(
-                          height: 10,
-                          width: 80,
-                          color: Colors.white,
+                          width: 75,
+                          height: 15,
+                          color: Colors.red,
                         ),
                       ),
-                      Shimmer(
-                        gradient: gradient,
-                        child: Container(
-                          margin: const EdgeInsets.symmetric(vertical: 15),
-                          height: 10,
-                          width: 80,
-                          color: Colors.white,
-                        ),
-                      ),
-                      Shimmer(
-                        gradient: gradient,
-                        child: Container(
-                          height: 10,
-                          width: 80,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           );
         }
 
         return GestureDetector(
-          onTap: () => Navigator.pushNamed(context, '/detailMarket',arguments: state.umkmData.result[index]),
+          onTap: () => Navigator.pushNamed(context, '/detailMarket',arguments: state.userBusinessItem[index]),
           child: MarketCard(
             category: state.userBusinessItem[index]
                 .itemBusinessCategory.itemCategory,
@@ -124,7 +141,16 @@ class MarketList extends StatelessWidget {
           ),
         );
       },
-      itemCount: state.hasReachedMax ? state.userBusinessItem.length : state.userBusinessItem.length + 2,
+      itemCount: 
+        state.hasReachedMax 
+        ? 
+        state.userBusinessItem.length 
+        : 
+          !state.userBusinessItem.isEmpty 
+          ?
+          state.userBusinessItem.length + 2
+          :
+          0
     );
   }
 }

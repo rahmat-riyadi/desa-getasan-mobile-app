@@ -33,12 +33,6 @@ class MarketSkeleton extends StatelessWidget {
       itemCount: 20,
       itemBuilder: (context, index) => Stack(
         children: [
-          // Container(
-          //   decoration: BoxDecoration(
-          //     color: Color.fromARGB(255, 212, 212, 212),
-          //     borderRadius: BorderRadius.circular(10)
-          //   ),
-          // ),
           Shimmer(
             gradient: const LinearGradient(
               colors: [
